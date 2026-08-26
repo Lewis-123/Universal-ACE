@@ -8,64 +8,83 @@ import Link from "next/link";
 export default function Navbar(){
 
 
-return (
+    return (
 
-<nav className="bg-green-700 text-white px-8 py-4 flex justify-between items-center">
-
-
-<h1 className="text-xl font-bold">
-
-Universal ACE
-
-</h1>
+        <nav className="bg-green-800 text-white px-8 py-5 shadow-lg">
 
 
+            <div className="max-w-7xl mx-auto flex justify-between items-center">
 
 
-<div className="flex gap-5">
+                <Link
+
+                href="/"
+
+                className="text-2xl font-bold"
+
+                >
+
+                    Universal ACE
+
+                </Link>
 
 
-<Link href="/">
-
-Home
-
-</Link>
 
 
-<Link href="/dashboard">
 
-Dashboard
-
-</Link>
+                <div className="flex gap-6 text-sm md:text-base">
 
 
-<Link href="/groups">
+                    <Link href="/">
 
-Groups
+                        Home
 
-</Link>
-
-
-<Link href="/add-group">
-
-Add Group
-
-</Link>
+                    </Link>
 
 
-<Link href="/add-member">
 
-Add Member
+                    <Link href="/dashboard">
 
-</Link>
+                        Dashboard
 
-
-</div>
+                    </Link>
 
 
-</nav>
 
-);
+                    <Link href="/groups">
+
+                        Groups
+
+                    </Link>
+
+
+
+                    <Link href="/add-group">
+
+                        Add Group
+
+                    </Link>
+
+
+
+                    <Link href="/add-member">
+
+                        Add Member
+
+                    </Link>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </nav>
+
+    );
 
 
 }

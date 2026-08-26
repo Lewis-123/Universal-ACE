@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+
+
 export default function Home(){
 
 
@@ -6,10 +10,10 @@ export default function Home(){
         <main className="min-h-screen bg-gray-100 p-10">
 
 
-            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-8">
+            <section className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-10 text-center">
 
 
-                <h1 className="text-4xl font-bold text-green-700 mb-5">
+                <h1 className="text-5xl font-bold text-green-800">
 
                     Universal ACE
 
@@ -17,12 +21,14 @@ export default function Home(){
 
 
 
-                <p className="text-gray-700 text-lg mb-5">
+
+                <p className="mt-6 text-lg text-gray-700">
 
 
-                    Universal ACE is a community savings management
-                    platform designed to help groups manage members,
-                    savings activities, and financial records efficiently.
+                    A community savings management platform
+                    designed to help groups manage members,
+                    savings records, and financial activities
+                    efficiently.
 
 
                 </p>
@@ -30,23 +36,77 @@ export default function Home(){
 
 
 
-                <a
 
-                href="https://github.com/YOUR_USERNAME/Universal-ACE"
-
-                target="_blank"
-
-                className="text-blue-600 underline"
-
-                >
-
-                    View Source Repository
-
-                </a>
+                <div className="mt-8 flex justify-center gap-5">
 
 
+                    <Link
 
-            </div>
+                    href="/dashboard"
+
+                    className="bg-green-700 text-white px-6 py-3 rounded-lg"
+
+                    >
+
+                        View Dashboard
+
+                    </Link>
+
+
+
+
+
+                    <Link
+
+                    href="/add-group"
+
+                    className="border border-green-700 text-green-700 px-6 py-3 rounded-lg"
+
+                    >
+
+                        Create Group
+
+                    </Link>
+
+
+
+                </div>
+
+
+
+
+                <div className="mt-10">
+
+
+                    <p className="text-gray-500">
+
+                        Source Code:
+
+                    </p>
+
+
+
+                    <a
+
+                    href="https://github.com/Lewis-123/Universal-ACE.git"
+
+                    target="_blank"
+
+                    className="text-blue-600 underline"
+
+                    >
+
+                        GitHub Repository
+
+                    </a>
+
+
+                </div>
+
+
+
+
+            </section>
 
 
         </main>

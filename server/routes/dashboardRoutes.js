@@ -4,18 +4,15 @@ const router = express.Router();
 
 
 const Group = require("../models/Group");
-
 const Member = require("../models/Member");
-
 
 
 
 // GET DASHBOARD STATISTICS
 
-router.get("/", async(req,res)=>{
+router.get("/", async (req, res) => {
 
-
-    try{
+    try {
 
 
         const totalGroups = await Group.countDocuments();
@@ -25,42 +22,34 @@ router.get("/", async(req,res)=>{
 
 
 
-        const savingsResult = await Member.aggregate([
+        const savingsData = await Member.aggregate([
 
             {
+                $group: {
 
-                $group:{
+                    _id: null,
 
-                    _id:null,
-
-                    totalSavings:{
-
-                        $sum:"$savingsBalance"
-
+                    totalSavings: {
+                        $sum: "$savingsBalance"
                     }
 
                 }
-
             }
 
         ]);
 
 
 
-        const totalSavings =
-
-        savingsResult.length > 0
-
-        ? savingsResult[0].totalSavings
-
-        : 0;
+        const totalSavings = savingsData.length > 0
+            ? savingsData[0].totalSavings
+            : 0;
 
 
 
 
         const activeGroups = await Group.countDocuments({
 
-            status:"Active"
+            status: "Active"
 
         });
 
@@ -68,7 +57,7 @@ router.get("/", async(req,res)=>{
 
 
 
-        res.json({
+        res.status(200).json({
 
             totalGroups,
 
@@ -82,7 +71,7 @@ router.get("/", async(req,res)=>{
 
 
 
-    }catch(error){
+    } catch(error) {
 
 
         res.status(500).json({

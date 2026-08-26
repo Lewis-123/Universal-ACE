@@ -12,18 +12,20 @@ import {
 } from "@/utils/api";
 
 
+import MemberList from "@/components/MemberList";
+
+
 
 export default function GroupList(){
 
 
-    const [groups, setGroups] = useState([]);
+    const [groups,setGroups] = useState([]);
 
-    const [loading, setLoading] = useState(true);
-
-
+    const [loading,setLoading] = useState(true);
 
 
-    // LOAD ALL GROUPS
+
+
 
     const loadGroups = async()=>{
 
@@ -62,6 +64,7 @@ export default function GroupList(){
 
 
 
+
     useEffect(()=>{
 
 
@@ -75,8 +78,6 @@ export default function GroupList(){
 
 
 
-
-    // DELETE GROUP
 
     const handleDelete = async(id)=>{
 
@@ -100,7 +101,9 @@ export default function GroupList(){
 
 
                 alert(
+
                     "Group deleted successfully"
+
                 );
 
 
@@ -112,14 +115,13 @@ export default function GroupList(){
             }catch(error){
 
 
-                console.log(
-                    "Delete error:",
-                    error
-                );
+                console.log(error);
 
 
                 alert(
+
                     "Failed to delete group"
+
                 );
 
 
@@ -159,30 +161,36 @@ export default function GroupList(){
 
 
 
-    return (
 
+
+
+    return (
 
         <div>
 
 
+
             {
 
-                groups.length === 0 ? (
+                groups.length === 0 ?
 
+
+
+                (
 
                     <div className="bg-white shadow rounded-xl p-8 text-center">
 
 
-                        <h2 className="text-xl font-semibold">
+                        <h2 className="text-xl font-bold">
 
-                            No groups available
+                            No groups found
 
                         </h2>
 
 
-                        <p className="mt-3 text-gray-600">
+                        <p className="text-gray-600 mt-2">
 
-                            Add your first community savings group.
+                            Create your first savings group.
 
                         </p>
 
@@ -190,17 +198,24 @@ export default function GroupList(){
                     </div>
 
 
-                ) : (
+                )
 
 
+
+                :
+
+
+
+                (
 
                     <div className="grid md:grid-cols-3 gap-6">
 
 
+
                         {
 
-
                             groups.map((group)=>(
+
 
 
                                 <div
@@ -213,7 +228,9 @@ export default function GroupList(){
 
 
 
-                                    <h2 className="text-2xl font-bold text-green-700 mb-4">
+
+
+                                    <h2 className="text-2xl font-bold text-green-700">
 
 
                                         {group.groupName}
@@ -225,33 +242,42 @@ export default function GroupList(){
 
 
 
-                                    <div className="space-y-2 text-gray-700">
+
+                                    <div className="mt-4 space-y-2">
 
 
                                         <p>
+
 
                                             <strong>
                                                 Location:
                                             </strong>
 
+
                                             {" "}
 
                                             {group.location}
+
 
                                         </p>
 
 
 
+
+
                                         <p>
 
+
                                             <strong>
-                                                Meeting Day:
+                                                Meeting:
                                             </strong>
+
 
                                             {" "}
 
                                             {group.meetingDay}
 
+
                                         </p>
 
 
@@ -260,19 +286,39 @@ export default function GroupList(){
 
                                         <p>
 
+
                                             <strong>
                                                 Status:
                                             </strong>
 
+
                                             {" "}
 
                                             {group.status}
+
 
                                         </p>
 
 
 
                                     </div>
+
+
+
+
+
+
+
+
+                                    {/* RELATED DATA DISPLAY */}
+
+                                    <MemberList
+
+                                    groupId={group._id}
+
+                                    />
+
+
 
 
 
@@ -300,15 +346,20 @@ export default function GroupList(){
 
 
 
+
                                         <button
+
 
                                         onClick={()=>handleDelete(group._id)}
 
+
                                         className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+
 
                                         >
 
                                             Delete
+
 
                                         </button>
 
@@ -319,7 +370,9 @@ export default function GroupList(){
 
 
 
+
                                 </div>
+
 
 
                             ))
@@ -328,13 +381,15 @@ export default function GroupList(){
                         }
 
 
-                    </div>
 
+                    </div>
 
 
                 )
 
+
             }
+
 
 
 

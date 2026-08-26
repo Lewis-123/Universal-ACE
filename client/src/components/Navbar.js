@@ -8,62 +8,64 @@ import Link from "next/link";
 export default function Navbar(){
 
 
-    return (
+return (
+
+<nav className="bg-green-700 text-white px-8 py-4 flex justify-between items-center">
 
 
-        <nav className="bg-green-700 text-white px-8 py-4 flex justify-between items-center">
+<h1 className="text-xl font-bold">
 
+Universal ACE
 
-            <h1 className="text-xl font-bold">
-
-                Universal ACE
-
-            </h1>
-
+</h1>
 
 
 
 
-            <div className="flex gap-6">
+<div className="flex gap-5">
 
 
-                <Link href="/">
+<Link href="/">
 
-                    Home
+Home
 
-                </Link>
-
-
-                <Link href="/groups">
-
-                    List Groups
-
-                </Link>
+</Link>
 
 
-                <Link href="/add-group">
+<Link href="/dashboard">
 
-                    Add Group
+Dashboard
 
-                </Link>
-
-
-
-                <Link href="/add-member">
-
-                    Add Member
-
-                </Link>
+</Link>
 
 
+<Link href="/groups">
 
-            </div>
+Groups
+
+</Link>
 
 
-        </nav>
+<Link href="/add-group">
+
+Add Group
+
+</Link>
 
 
-    );
+<Link href="/add-member">
+
+Add Member
+
+</Link>
+
+
+</div>
+
+
+</nav>
+
+);
 
 
 }

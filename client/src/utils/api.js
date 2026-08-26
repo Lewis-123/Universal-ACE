@@ -3,17 +3,15 @@ import axios from "axios";
 
 const API = axios.create({
 
-    baseURL: process.env.NEXT_PUBLIC_API_URL
+    baseURL:process.env.NEXT_PUBLIC_API_URL
 
 });
 
 
 
 
-// ================= GROUP API =================
 
-
-// GET ALL GROUPS
+// GROUPS
 
 export const getGroups = async()=>{
 
@@ -26,8 +24,6 @@ export const getGroups = async()=>{
 
 
 
-// GET SINGLE GROUP
-
 export const getGroupById = async(id)=>{
 
     const response = await API.get(`/groups/${id}`);
@@ -39,13 +35,11 @@ export const getGroupById = async(id)=>{
 
 
 
-// CREATE GROUP
-
-export const createGroup = async(groupData)=>{
+export const createGroup = async(data)=>{
 
     const response = await API.post(
         "/groups",
-        groupData
+        data
     );
 
     return response.data;
@@ -55,13 +49,11 @@ export const createGroup = async(groupData)=>{
 
 
 
-// UPDATE GROUP
-
-export const updateGroup = async(id,groupData)=>{
+export const updateGroup = async(id,data)=>{
 
     const response = await API.put(
         `/groups/${id}`,
-        groupData
+        data
     );
 
     return response.data;
@@ -70,8 +62,6 @@ export const updateGroup = async(id,groupData)=>{
 
 
 
-
-// DELETE GROUP
 
 export const deleteGroup = async(id)=>{
 
@@ -88,34 +78,17 @@ export const deleteGroup = async(id)=>{
 
 
 
-// ================= MEMBER API =================
 
+// MEMBERS
 
-// GET ALL MEMBERS
-
-export const getMembers = async()=>{
-
-
-    const response = await API.get("/members");
-
-
-    return response.data;
-
-
-};
-
-
-
-
-
-
-// GET MEMBERS BY GROUP
 
 export const getMembersByGroup = async(groupId)=>{
 
 
     const response = await API.get(
+
         `/members/group/${groupId}`
+
     );
 
 
@@ -127,19 +100,14 @@ export const getMembersByGroup = async(groupId)=>{
 
 
 
-
-
-
-// CREATE MEMBER
-
-export const createMember = async(memberData)=>{
+export const createMember = async(data)=>{
 
 
     const response = await API.post(
 
         "/members",
 
-        memberData
+        data
 
     );
 
@@ -154,17 +122,15 @@ export const createMember = async(memberData)=>{
 
 
 
-
-// UPDATE MEMBER
-
-export const updateMember = async(id,memberData)=>{
+// DASHBOARD
 
 
-    const response = await API.put(
+export const getDashboardStats = async()=>{
 
-        `/members/${id}`,
 
-        memberData
+    const response = await API.get(
+
+        "/dashboard"
 
     );
 
@@ -177,21 +143,4 @@ export const updateMember = async(id,memberData)=>{
 
 
 
-
-
-// DELETE MEMBER
-
-export const deleteMember = async(id)=>{
-
-
-    const response = await API.delete(
-
-        `/members/${id}`
-
-    );
-
-
-    return response.data;
-
-
-};
+export default API;

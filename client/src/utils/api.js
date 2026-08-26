@@ -1,19 +1,26 @@
 import axios from "axios";
 
 
+
+// VERCEL API BASE URL
+
 const API = axios.create({
 
-    baseURL:process.env.NEXT_PUBLIC_API_URL
+    baseURL: process.env.NEXT_PUBLIC_API_URL || "/api"
 
 });
 
 
 
 
+// ==========================
+// GROUP API FUNCTIONS
+// ==========================
 
-// GROUPS
 
-export const getGroups = async()=>{
+// GET ALL GROUPS
+
+export const getGroups = async () => {
 
     const response = await API.get("/groups");
 
@@ -24,7 +31,9 @@ export const getGroups = async()=>{
 
 
 
-export const getGroupById = async(id)=>{
+// GET SINGLE GROUP BY ID
+
+export const getGroupById = async (id) => {
 
     const response = await API.get(`/groups/${id}`);
 
@@ -35,12 +44,18 @@ export const getGroupById = async(id)=>{
 
 
 
-export const createGroup = async(data)=>{
+// CREATE GROUP
+
+export const createGroup = async (groupData) => {
 
     const response = await API.post(
+
         "/groups",
-        data
+
+        groupData
+
     );
+
 
     return response.data;
 
@@ -49,12 +64,18 @@ export const createGroup = async(data)=>{
 
 
 
-export const updateGroup = async(id,data)=>{
+// UPDATE GROUP
+
+export const updateGroup = async (id, groupData) => {
 
     const response = await API.put(
+
         `/groups/${id}`,
-        data
+
+        groupData
+
     );
+
 
     return response.data;
 
@@ -63,11 +84,16 @@ export const updateGroup = async(id,data)=>{
 
 
 
-export const deleteGroup = async(id)=>{
+// DELETE GROUP
+
+export const deleteGroup = async (id) => {
 
     const response = await API.delete(
+
         `/groups/${id}`
+
     );
+
 
     return response.data;
 
@@ -79,10 +105,33 @@ export const deleteGroup = async(id)=>{
 
 
 
-// MEMBERS
+
+// ==========================
+// MEMBER API FUNCTIONS
+// ==========================
 
 
-export const getMembersByGroup = async(groupId)=>{
+// GET ALL MEMBERS
+
+export const getMembers = async () => {
+
+
+    const response = await API.get("/members");
+
+
+    return response.data;
+
+
+};
+
+
+
+
+
+
+// GET MEMBERS BY GROUP
+
+export const getMembersByGroup = async (groupId) => {
 
 
     const response = await API.get(
@@ -100,14 +149,16 @@ export const getMembersByGroup = async(groupId)=>{
 
 
 
-export const createMember = async(data)=>{
 
 
-    const response = await API.post(
+// GET SINGLE MEMBER
 
-        "/members",
+export const getMemberById = async (id) => {
 
-        data
+
+    const response = await API.get(
+
+        `/members/${id}`
 
     );
 
@@ -122,10 +173,91 @@ export const createMember = async(data)=>{
 
 
 
-// DASHBOARD
+
+// CREATE MEMBER
+
+export const createMember = async (memberData) => {
 
 
-export const getDashboardStats = async()=>{
+    const response = await API.post(
+
+        "/members",
+
+        memberData
+
+    );
+
+
+    return response.data;
+
+
+};
+
+
+
+
+
+
+
+
+// UPDATE MEMBER
+
+export const updateMember = async (id, memberData) => {
+
+
+    const response = await API.put(
+
+        `/members/${id}`,
+
+        memberData
+
+    );
+
+
+    return response.data;
+
+
+};
+
+
+
+
+
+
+
+// DELETE MEMBER
+
+export const deleteMember = async (id) => {
+
+
+    const response = await API.delete(
+
+        `/members/${id}`
+
+    );
+
+
+    return response.data;
+
+
+};
+
+
+
+
+
+
+
+
+
+// ==========================
+// DASHBOARD API FUNCTIONS
+// ==========================
+
+
+// GET DASHBOARD STATISTICS
+
+export const getDashboardStats = async () => {
 
 
     const response = await API.get(
@@ -139,6 +271,8 @@ export const getDashboardStats = async()=>{
 
 
 };
+
+
 
 
 

@@ -1,68 +1,130 @@
 const express = require("express");
+
 const router = express.Router();
 
+
 const Member = require("../models/Member");
+
 const Group = require("../models/Group");
 
 
 
-// GET ALL MEMBERS
-router.get("/", async (req, res) => {
 
-    try {
+
+// GET ALL MEMBERS
+
+router.get("/", async(req,res)=>{
+
+
+    try{
+
 
         const members = await Member.find()
-            .populate("groupId");
+        .populate("groupId");
 
 
         res.json(members);
 
 
-    } catch (error) {
+
+    }catch(error){
+
 
         res.status(500).json({
-            message: error.message
+
+            message:error.message
+
         });
+
 
     }
 
+
 });
+
+
+
+
+
+
+// GET MEMBERS BY GROUP
+
+router.get("/group/:groupId", async(req,res)=>{
+
+
+    try{
+
+
+        const members = await Member.find({
+
+            groupId:req.params.groupId
+
+        });
+
+
+
+        res.json(members);
+
+
+
+    }catch(error){
+
+
+        res.status(500).json({
+
+            message:error.message
+
+        });
+
+
+    }
+
+
+});
+
+
 
 
 
 
 
 // GET SINGLE MEMBER
-router.get("/:id", async (req, res) => {
 
-    try {
-
-
-        const member = await Member.findById(req.params.id)
-            .populate("groupId");
+router.get("/:id", async(req,res)=>{
 
 
-        if (!member) {
+    try{
 
-            return res.status(404).json({
-                message: "Member not found"
-            });
 
-        }
+        const member = await Member.findById(
+
+            req.params.id
+
+        ).populate("groupId");
+
 
 
         res.json(member);
 
 
-    } catch (error) {
+
+    }catch(error){
+
 
         res.status(500).json({
-            message: error.message
+
+            message:error.message
+
         });
+
 
     }
 
+
 });
+
+
+
 
 
 
@@ -70,54 +132,49 @@ router.get("/:id", async (req, res) => {
 
 
 // CREATE MEMBER
-router.post("/", async (req, res) => {
+
+router.post("/", async(req,res)=>{
 
 
-    try {
+    try{
 
 
-        const group = await Group.findById(req.body.groupId);
+        const group = await Group.findById(
+
+            req.body.groupId
+
+        );
 
 
-        if (!group) {
+
+        if(!group){
+
 
             return res.status(404).json({
 
-                message: "Group not found"
+                message:"Group not found"
 
             });
+
 
         }
 
 
 
 
-        const member = new Member({
-
-            memberName: req.body.memberName,
-
-            phone: req.body.phone,
-
-            gender: req.body.gender,
-
-            occupation: req.body.occupation,
-
-            savingsBalance: req.body.savingsBalance,
-
-            groupId: req.body.groupId
-
-        });
+        const member = new Member(req.body);
 
 
 
         const savedMember = await member.save();
 
 
+
         res.status(201).json(savedMember);
 
 
 
-    } catch(error){
+    }catch(error){
 
 
         res.status(400).json({
@@ -139,7 +196,9 @@ router.post("/", async (req, res) => {
 
 
 
+
 // UPDATE MEMBER
+
 router.put("/:id", async(req,res)=>{
 
 
@@ -185,14 +244,21 @@ router.put("/:id", async(req,res)=>{
 
 
 
+
 // DELETE MEMBER
+
 router.delete("/:id", async(req,res)=>{
 
 
     try{
 
 
-        await Member.findByIdAndDelete(req.params.id);
+        await Member.findByIdAndDelete(
+
+            req.params.id
+
+        );
+
 
 
         res.json({
@@ -217,6 +283,8 @@ router.delete("/:id", async(req,res)=>{
 
 
 });
+
+
 
 
 

@@ -9,9 +9,13 @@ const API = axios.create({
 
 
 
+
+// ================= GROUP API =================
+
+
 // GET ALL GROUPS
 
-export const getGroups = async () => {
+export const getGroups = async()=>{
 
     const response = await API.get("/groups");
 
@@ -24,7 +28,7 @@ export const getGroups = async () => {
 
 // GET SINGLE GROUP
 
-export const getGroupById = async (id) => {
+export const getGroupById = async(id)=>{
 
     const response = await API.get(`/groups/${id}`);
 
@@ -37,7 +41,7 @@ export const getGroupById = async (id) => {
 
 // CREATE GROUP
 
-export const createGroup = async (groupData) => {
+export const createGroup = async(groupData)=>{
 
     const response = await API.post(
         "/groups",
@@ -53,7 +57,7 @@ export const createGroup = async (groupData) => {
 
 // UPDATE GROUP
 
-export const updateGroup = async (id, groupData) => {
+export const updateGroup = async(id,groupData)=>{
 
     const response = await API.put(
         `/groups/${id}`,
@@ -69,12 +73,125 @@ export const updateGroup = async (id, groupData) => {
 
 // DELETE GROUP
 
-export const deleteGroup = async (id) => {
+export const deleteGroup = async(id)=>{
 
     const response = await API.delete(
         `/groups/${id}`
     );
 
     return response.data;
+
+};
+
+
+
+
+
+
+// ================= MEMBER API =================
+
+
+// GET ALL MEMBERS
+
+export const getMembers = async()=>{
+
+
+    const response = await API.get("/members");
+
+
+    return response.data;
+
+
+};
+
+
+
+
+
+
+// GET MEMBERS BY GROUP
+
+export const getMembersByGroup = async(groupId)=>{
+
+
+    const response = await API.get(
+        `/members/group/${groupId}`
+    );
+
+
+    return response.data;
+
+
+};
+
+
+
+
+
+
+
+// CREATE MEMBER
+
+export const createMember = async(memberData)=>{
+
+
+    const response = await API.post(
+
+        "/members",
+
+        memberData
+
+    );
+
+
+    return response.data;
+
+
+};
+
+
+
+
+
+
+
+// UPDATE MEMBER
+
+export const updateMember = async(id,memberData)=>{
+
+
+    const response = await API.put(
+
+        `/members/${id}`,
+
+        memberData
+
+    );
+
+
+    return response.data;
+
+
+};
+
+
+
+
+
+
+// DELETE MEMBER
+
+export const deleteMember = async(id)=>{
+
+
+    const response = await API.delete(
+
+        `/members/${id}`
+
+    );
+
+
+    return response.data;
+
 
 };
